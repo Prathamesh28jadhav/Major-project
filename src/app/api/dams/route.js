@@ -12,7 +12,7 @@ export async function POST(req) {
         const data = await req.json();
         const dam = await Dam.create(data);
 
-        return NextResponse.json({ success: true, message: "Dam info saved!", dam });
+        return NextResponse.json({ success: true, message: "Dam info saved!", data: dam });
     } catch (err) {
         console.error(err);
         return NextResponse.json(

@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function AdminPage() {
     const [user, setUser] = useState(null);
@@ -21,6 +22,8 @@ export default function AdminPage() {
         effective_storage_capacity_1000m3: "",
         purpose: "",
         designed_spillway_capacity_m3s: "",
+        runoff_coefficient: "",      // ✅ NEW FIELD
+        catchment_area_km2: "",
     });
 
     const router = useRouter();
@@ -41,6 +44,8 @@ export default function AdminPage() {
             effective_storage_capacity_1000m3: "",
             purpose: "",
             designed_spillway_capacity_m3s: "",
+            runoff_coefficient: "",      // ✅ NEW FIELD
+            catchment_area_km2: "",
         });
     };
 
@@ -137,23 +142,16 @@ export default function AdminPage() {
 
             {/* Dams List */}
             <h2 className="text-2xl font-semibold mb-4">All Dams</h2>
-            {loading ? (
-                <p className="text-gray-500">Loading dams...</p>
-            ) : dams.length === 0 ? (
-                <p className="text-gray-500">No dams available</p>
-            ) : (
-                <ul className="space-y-3">
-                    {dams.map((dam) => (
-                        <li
-                            key={dam._id}
-                            className="border rounded-lg p-4 shadow-sm hover:shadow-md transition"
-                        >
+            <ul className="grid gap-4 sm:grid-cols-2">
+                {dams.map((dam) => (
+                    <li key={dam._id} className="border rounded-lg p-4 shadow-sm hover:shadow-md transition">
+                        <Link href={`/dam/${dam._id}`} className="block">
                             <strong className="text-blue-700">{dam.name}</strong>{" "}
                             ({dam.year_completed}) — {dam.location}
-                        </li>
-                    ))}
-                </ul>
-            )}
+                        </Link>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 }
