@@ -30,9 +30,13 @@ export default function LoginPage() {
         localStorage.setItem("role", data.role);
         setPopup("Login successful ✅");
 
-        // ✅ Redirect admin to dashboard
+        // ✅ Redirect based on role
         setTimeout(() => {
-          router.push("/admin");
+          if (data.role === "admin") {
+            router.push("/admin");
+          } else {
+            router.push("/dashboard");
+          }
         }, 1000); // wait 1 sec to show popup
       } else {
         setPopup(data.message || "Invalid credentials ❌");
@@ -42,6 +46,7 @@ export default function LoginPage() {
       setPopup("Something went wrong");
     }
   };
+
 
   return (
     <div
