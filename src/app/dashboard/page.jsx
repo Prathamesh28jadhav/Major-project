@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/sidebar";
+import WaterLevelChart from "@/components/WaterLevelCharts";
 import {
     Card,
     CardContent,
@@ -132,10 +133,8 @@ export default function Dashboard() {
 
                         {/* Rainfall Chart */}
                         <div className="mt-8">
-                            <h2 className="text-xl font-semibold mb-4">Rainfall (mm)</h2>
-                            <div className="h-40 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">
-                                📊 Rainfall Chart (replace with chart library)
-                            </div>
+                            <h2 className="text-xl font-semibold mb-4">Water Level (%) Over Time</h2>
+                            <WaterLevelChart waterLogs={selectedDam.waterLogs} />
                         </div>
 
                         {/* 5-Day Forecast */}
